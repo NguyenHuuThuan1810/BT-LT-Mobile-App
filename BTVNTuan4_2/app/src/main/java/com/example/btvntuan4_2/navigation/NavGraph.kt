@@ -7,6 +7,9 @@ import androidx.navigation.compose.composable
 import com.example.btvntuan4_2.screens.*
 
 sealed class Screen(val route: String) {
+    object Login : Screen("login")
+    object Profile : Screen("profile")
+
     object Forgot : Screen("forgot")
 
     object Verify : Screen("verify/{email}") {
@@ -25,7 +28,9 @@ sealed class Screen(val route: String) {
 
 @Composable
 fun NavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Forgot.route) {
+    NavHost(navController = navController, startDestination = Screen.Login.route) {
+        composable(Screen.Login.route) { LoginScreen(navController) }
+        composable(Screen.Profile.route) { ProfileScreen(navController) }
         composable(Screen.Forgot.route) {
             ForgotPasswordScreen(navController)
         }
